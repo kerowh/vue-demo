@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    .red{
+        background: red;
+    }
+</style>
+<body>
+<div id="app">
+    {{time | filterDate}}
+    <br>
+    <span v-html="html"></span>
+    <br>
+    <span :class="classname">红色的</span>
+    <br>
+    <button @click="click">{{number}}</button>
+    <br>
+    {{array}}
+    <br>
+<!--    {{array.reverse()}}-->
+    <br>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script>
+    var plusDate = function (value) {
+        return value>10 ? value : '0'+value
+    }
+    var app = new Vue({
+        el:'#app',
+        data:{
+            time:new Date(),
+            text:'这是一个text文本',
+            array:[123456789],
+            html:'<a href="www.baidu.com">baidu</a>',
+            classname:'red',
+            number:0
+        },
+        methods:{
+            click(){
+                this.number+=1
+            }
+        },
+        mounted:function () {
+          var timer = setInterval(()=>{
+              this.time = new Date()
+          },1000)
+        },
+        filters:{
+          filterDate:function (value) {
+              var date = new Date(value)
+              var year = date.getFullYear()
+              var month = plusDate(date.getMonth()+1)
+              var day = plusDate(date.getDay())
+              var hour = plusDate(date.getHours())
+              var min = plusDate(date.getMinutes())
+              var sec = plusDate(date.getSeconds())
+              return year +'-'+month+'-'+day+'  '+hour+':'+min
+              +':'+sec
+
+          }
+        },
+        beforeDestory:function () {
+            if (this.timer){
+                clearInterval(this.timer)
+            }
+        }
+    })
+</script>
+</body>
+</html>
