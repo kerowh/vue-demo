@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<style>
+   [v-cloak]{
+       display: none;
+   }
+</style>
+<div id="app">
+    <div v-cloak>{{value.name}}</div>
+    <br>
+    <div>
+        <button @click="clickUpdate" key="button1">{{value.count}}</button>
+        <div v-once>{{message}}</div>
+        <button @click="click" v-once>点击弹出，点击第二次不会弹出</button>
+        <br>
+        <input v-if="name" type="text" placeholder="请输入用户名" key="name">
+        <input v-else type="text" placeholder="请输入密码" key="password">
+        <button @click="changeTriggle">切换状态</button>
+        <br>
+        <div v-for="(value,index) in vueMessage">{{index}}--{{value.name}}</div>
+        <div v-for="(value,key,index) in nvShen">{{key}},{{value}},{{index}}</div>
+        <br>
+        <div v-for="value in arr">{{value}}</div>
+        <br>
+        <button @click="append">添加到最后一个</button>
+        <button @click="pop">删除最后一个元素</button>
+        <button @click="splice">删除和添加</button>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            value:{
+                name:'wangHai',
+                count:0,
+
+            },
+            message:'王海',
+            name: true,
+            vueMessage:[
+                {name:'多思考'},
+                {name:'多练习'},
+                {name:'多看书'}
+            ],
+            nvShen:{
+                girl1:'god1',
+                girl2:'god2',
+                girl3:'god3',
+            },
+            arr:['book','pen','pencil']
+        },
+        methods:{
+            click() {
+                alert('点击了一次，再次点击是不会执行的')
+            },
+            clickUpdate(){
+                this.value.count+=1
+            },
+            clickUpdate2(){
+                this.value.count+=8
+            },
+            changeTriggle(){
+                this.name = !this.name;
+            },
+            append(){
+                this.arr.push('apple')
+            },
+            pop() {
+                this.arr.pop()
+            },
+            splice(){
+                this.arr.splice(this.arr.length,0,"what")
+            }
+        }
+    })
+</script>
+</body>
+</html>
