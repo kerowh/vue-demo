@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<style>
+    .red{
+        background: red;
+    }
+
+    .blue{
+        background: blue;
+    }
+
+    .border{
+        border: 10px solid green;
+    }
+
+    .yellow{
+        background: yellow;
+    }
+</style>
+<div id="app">
+    <div class="whatever" :class="[red,border]">随便什么</div>
+    <div class="whatever" :class="[{blue:isActive},border]">随便什么</div>
+    <div class="whatever" :class="[color,border]">随便什么yellow</div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+            isRedActive:true,
+            isBlueActive:true,
+            isActive:true,
+            red:'red',
+            border:'border',
+            color:'yellow'
+        },
+    })
+</script>
+</body>
+</html>
