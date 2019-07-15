@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<div id="app">
+    输入的width值<input type="text" v-model="width">
+    <p>{{width}}</p>
+    <my-compen :width="width"></my-compen>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+<script>
+    var app = new Vue({
+        el:'#app',
+        data:{
+           width:'',
+        },
+        components:{
+            "my-compen":{
+                props:['width'],
+                template:'<div :style="divClass"></div>',
+                computed:{
+                    divClass:function () {
+                        console.log(this.width);
+                        return {
+                            width:this.width+'px',
+                            background:'red',
+                            height:'30px'
+                        }
+                    }
+                },
+            }
+        }
+    })
+</script>
+</body>
+</html>
